@@ -1,0 +1,75 @@
+[gd_scene load_steps=5 format=3 uid="uid://dfk3xitw468xh"]
+
+[ext_resource type="Script" uid="uid://hh1abg40rt6d" path="res://addons/BMPToSceneConverter/PreviewWindow.cs" id="1_27mg1"]
+[ext_resource type="Script" uid="uid://cvygw6v664k27" path="res://CommonGodotUI/Scripts/UI/CanvasItemPreview.cs" id="2_tmj44"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_tutln"]
+size = Vector2(256, 256)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_27mg1"]
+size = Vector2(256, 256)
+
+[node name="Window" type="Window" node_paths=PackedStringArray("inputImagePreview", "outputScenePreview", "saveDialog")]
+title = "Preview"
+initial_position = 4
+size = Vector2i(526, 300)
+unresizable = true
+script = ExtResource("1_27mg1")
+inputImagePreview = NodePath("VBoxContainer/Previews/Input Preview")
+outputScenePreview = NodePath("VBoxContainer/Previews/Output Preview")
+saveDialog = NodePath("VBoxContainer/Buttons/Save Dialog")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -258.0
+offset_top = -145.5
+offset_right = 258.0
+offset_bottom = 145.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Previews" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Input Preview" type="TextureRect" parent="VBoxContainer/Previews"]
+texture_filter = 1
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_tutln")
+stretch_mode = 5
+
+[node name="Output Preview" type="TextureRect" parent="VBoxContainer/Previews"]
+texture_filter = 1
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_27mg1")
+script = ExtResource("2_tmj44")
+
+[node name="Buttons" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Save Dialog" type="FileDialog" parent="VBoxContainer/Buttons"]
+auto_translate_mode = 1
+initial_position = 4
+filters = PackedStringArray("*.tscn ; Godot Scene")
+
+[node name="Cancel Button" type="Button" parent="VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Cancel"
+
+[node name="Save Button" type="Button" parent="VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Save As..."
+
+[connection signal="close_requested" from="." to="." method="hide"]
+[connection signal="pressed" from="VBoxContainer/Buttons/Cancel Button" to="." method="OnCancel"]
+[connection signal="pressed" from="VBoxContainer/Buttons/Save Button" to="VBoxContainer/Buttons/Save Dialog" method="popup"]
