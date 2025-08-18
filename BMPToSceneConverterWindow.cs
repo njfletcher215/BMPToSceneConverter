@@ -6,9 +6,6 @@ using System.IO;
 /// The control panel for the Plugin.
 /// </summary>
 // TODO annotate and otherwise clean up
-// TODO test with new color mapping displays
-// TODO inputFilePathsLabel should probably be scrollable
-//      and the mapping info grid could be too
 [Tool]
 public partial class BMPToSceneConverterWindow : Window {
     [Export] private FileDialog inputDialog;
@@ -61,7 +58,6 @@ public partial class BMPToSceneConverterWindow : Window {
                 foreach (string inputFilePath in this.InputFilePaths)
                     this.OpenPreviewWindow(inputFilePath, this.MappingFilePath);
         };
-        // TODO this needs to display the preview information
         this.mappingDialog.FileSelected += (path) => {
             this.MappingFilePath = path;
             if (this.InputFilePaths != null && this.InputFilePaths.Length > 0)
@@ -76,9 +72,9 @@ public partial class BMPToSceneConverterWindow : Window {
     /// <param name="inputFilePaths">The path to the input file for the preview window.</param>
     /// <param name="mappingFilePath">The path to the mapping file for the preview window.</param>
     private void OpenPreviewWindow(string inputFilePaths, string mappingFilePath) {
-        PreviewWindow previewWindow =
-            GD.Load<PackedScene>(Plugin.PREVIEW_WINDOW_SCENE_PATH)
-            .Instantiate<PreviewWindow>();
+        BMPToSceneConverterPreviewWindow previewWindow =
+            GD.Load<PackedScene>(BMPToSceneConverterPlugin.PREVIEW_WINDOW_SCENE_PATH)
+            .Instantiate<BMPToSceneConverterPreviewWindow>();
         previewWindow.Initialize(inputFilePaths, mappingFilePath);
         previewWindow.CloseRequested += () => this.OnPreviewWindowClosed();
         EditorInterface.Singleton.GetBaseControl().AddChild(previewWindow);

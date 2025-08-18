@@ -1,7 +1,6 @@
 using System;
 using Godot;
 
-// TODO add an index label which is initialized by the BMPToSceneConverterMappingInfoDisplay. It should show itself when color or prefab is set, and hide itself when they are both unset.
 // TODO I also need methods to unset / clear
 
 /// <summary>
@@ -11,7 +10,6 @@ using Godot;
 public partial class BMPToSceneConverterColorMappingDisplay : Container {
     [Export] private TextureRect colorDisplay;
     [Export] private SimpleFormatStringLabel indexLabel;
-    // TODO I should figure out how to make the prefab preview a square, and let the color display take up the rest of the space
     [Export] private CanvasItemPreview prefabPreview;
 
     private bool initialized = false;

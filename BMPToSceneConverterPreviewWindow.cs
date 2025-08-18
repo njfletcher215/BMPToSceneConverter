@@ -54,7 +54,7 @@ public partial class BMPToSceneConverterPreviewWindow : Window {
             string.IsNullOrEmpty(mappingFilePath))
             return;  // TODO this should open a popup with an error message
 
-        var mapping = ResourceLoader.Load<Mapping>(mappingFilePath);
+        var mapping = ResourceLoader.Load<BMPToSceneConverterMapping>(mappingFilePath);
         if (mapping == null) {
             GD.PrintErr("Failed to load mapping: ", mappingFilePath);
             return;

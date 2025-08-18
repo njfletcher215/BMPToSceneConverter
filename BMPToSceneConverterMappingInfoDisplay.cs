@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-// TODO make the container in the scene a HFlowContainer, so the color mapppings can be sized properly
 // TODO I need methods to unset / clear
 
 /// <summary>
@@ -20,7 +19,6 @@ public partial class BMPToSceneConverterMappingInfoDisplay : Container {
     /// </summary>
     private BMPToSceneConverterColorMappingDisplay[] colorMappingDisplays;
 
-    // TODO the returned palette is NOT correct
     public static Color[] GetPalette(string bmpFilePath) {
         using FileStream fs = File.OpenRead(bmpFilePath);
         using BinaryReader reader = new BinaryReader(fs);
