@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-// TODO I need methods to unset / clear
-
 /// <summary>
 /// A display for a BMPToSceneConverter mapping. Shows the offset, pixel size, and color mappings.
 /// </summary>
