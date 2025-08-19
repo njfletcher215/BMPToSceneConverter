@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://mugd3ekju64r"]
 
-[ext_resource type="Script" uid="uid://ckhb6e0bdtjal" path="res://addons/BMPToSceneConverter/Window.cs" id="1_ig8pg"]
+[ext_resource type="Script" uid="uid://ckhb6e0bdtjal" path="res://addons/BMPToSceneConverter/BMPToSceneConverterWindow.cs" id="1_ig8pg"]
 [ext_resource type="Script" uid="uid://dh73elbg7udc8" path="res://addons/CommonGodotUI/Scripts/UI/SimpleFormatStringLabel.cs" id="2_lisqh"]
-[ext_resource type="Script" uid="uid://do2qaj87og2fx" path="res://addons/BMPToSceneConverter/MappingInfoDisplay.cs" id="3_0ny64"]
-[ext_resource type="Script" uid="uid://d0532gbxau8pb" path="res://addons/BMPToSceneConverter/ColorMappingDisplay.cs" id="4_brr5b"]
+[ext_resource type="Script" uid="uid://do2qaj87og2fx" path="res://addons/BMPToSceneConverter/BMPToSceneConverterMappingInfoDisplay.cs" id="3_0ny64"]
+[ext_resource type="Script" uid="uid://d0532gbxau8pb" path="res://addons/BMPToSceneConverter/BMPToSceneConverterColorMappingDisplay.cs" id="4_brr5b"]
 [ext_resource type="Script" uid="uid://cvygw6v664k27" path="res://addons/CommonGodotUI/Scripts/UI/CanvasItemPreview.cs" id="5_brr5b"]
 
 [node name="Window" type="Window" node_paths=PackedStringArray("inputDialog", "mappingDialog", "inputFilePathsLabel", "mappingFilePathLabel", "mappingInfoDisplay")]
@@ -70,7 +70,7 @@ vertical_scroll_mode = 0
 
 [node name="Mapping File Path" type="Label" parent="VBoxContainer/File Selectors/Mapping File Paths Scroll Container"]
 layout_mode = 2
-text = "No Mapping FIle Selected"
+text = "No Mapping File Selected"
 script = ExtResource("2_lisqh")
 formatString = "{mappingFilePath}"
 
