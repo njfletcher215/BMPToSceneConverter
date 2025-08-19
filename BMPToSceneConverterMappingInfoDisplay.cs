@@ -68,6 +68,17 @@ public partial class BMPToSceneConverterMappingInfoDisplay : Container {
     }
 
     /// <summary>
+    /// Clear the display.
+    /// </summary>
+    public void Clear() {
+        this.offsetLabel.SetValue("x", null);
+        this.offsetLabel.SetValue("y", null);
+        this.pixelSizeLabel.SetValue("x", null);
+        this.pixelSizeLabel.SetValue("y", null);
+        foreach (BMPToSceneConverterColorMappingDisplay colorMappingDisplay in this.colorMappingDisplays) colorMappingDisplay.Clear();
+    }
+
+    /// <summary>
     /// Update the display with the given offset, pixel size, color, and/or prefab information.
     /// </summary>
     /// <param name="offset">The offset of the mapping.</param>

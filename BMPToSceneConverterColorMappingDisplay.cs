@@ -1,8 +1,6 @@
 using System;
 using Godot;
 
-// TODO I also need methods to unset / clear
-
 /// <summary>
 /// A display for a BMPToSceneConverter color mapping. Shows the color, prefab, and prefab file path.
 /// </summary>

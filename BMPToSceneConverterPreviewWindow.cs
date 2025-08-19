@@ -2,6 +2,8 @@ using Godot;
 using System;
 using System.IO;
 
+// TODO this should open immediately, THEN start generating the scene.
+
 // TODO annotate
 [Tool]
 public partial class BMPToSceneConverterPreviewWindow : Window {
@@ -11,6 +13,7 @@ public partial class BMPToSceneConverterPreviewWindow : Window {
 
     private PackedScene scene;
 
+    // TODO this should only be initialized once
     public void Initialize(string inputFilePath, string mappingFilePath) {
         this.LoadInputPreviewImage(inputFilePath);
         this.GenerateScene(inputFilePath, mappingFilePath);

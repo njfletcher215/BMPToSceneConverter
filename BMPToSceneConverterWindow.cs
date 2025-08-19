@@ -42,15 +42,6 @@ public partial class BMPToSceneConverterWindow : Window {
 
     private int previewsClosed;
 
-    /// <summary>
-    /// Initialize this with empty data.
-    /// </summary>
-    private void Initialize() {
-        this.InputFilePaths = new string[0];
-        this.previewsClosed = 0;
-        this.MappingFilePath = null;
-    }
-
     public override void _Ready() {
         this.inputDialog.FilesSelected += (paths) => {
             this.InputFilePaths = paths;
@@ -92,7 +83,17 @@ public partial class BMPToSceneConverterWindow : Window {
     /// Reset this, then hide it.
     /// </summary>
     private void OnCloseRequested() {
-        this.Initialize();  // TODO I don't think this is working... its also not the correct name -- I only use 'initialize' for things that happen once.
+        this.Reset();  // TESTME
         this.Hide();
+    }
+
+    /// <summary>
+    /// Reset this with empty data.
+    /// </summary>
+    private void Reset() {
+        this.InputFilePaths = new string[0];  // TESTME
+        this.previewsClosed = 0;
+        this.MappingFilePath = null;
+        this.mappingInfoDisplay.Clear();
     }
 }
