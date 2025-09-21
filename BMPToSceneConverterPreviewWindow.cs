@@ -1,8 +1,7 @@
 using Godot;
 using System;
 using System.IO;
-
-// TODO this should open immediately, THEN start generating the scene.
+using System.Threading.Tasks;
 
 // TODO annotate
 [Tool]
@@ -14,9 +13,9 @@ public partial class BMPToSceneConverterPreviewWindow : Window {
     private PackedScene scene;
 
     // TODO this should only be initialized once
-    public void Initialize(string inputFilePath, string mappingFilePath) {
+    public async Task Initialize(string inputFilePath, string mappingFilePath) {
         this.LoadInputPreviewImage(inputFilePath);
-        this.GenerateScene(inputFilePath, mappingFilePath);
+        await Task.Run(() => this.GenerateScene(inputFilePath, mappingFilePath));
     }
 
     public override void _Ready() {

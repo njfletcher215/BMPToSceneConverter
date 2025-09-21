@@ -60,15 +60,15 @@ public partial class BMPToSceneConverterWindow : Window {
     /// <summary>
     /// Open a preview window for the given input and mapping files.
     /// </summary>
-    /// <param name="inputFilePaths">The path to the input file for the preview window.</param>
+    /// <param name="inputFilePath">The path to the input file for the preview window.</param>
     /// <param name="mappingFilePath">The path to the mapping file for the preview window.</param>
-    private void OpenPreviewWindow(string inputFilePaths, string mappingFilePath) {
+    private void OpenPreviewWindow(string inputFilePath, string mappingFilePath) {
         BMPToSceneConverterPreviewWindow previewWindow =
             GD.Load<PackedScene>(BMPToSceneConverterPlugin.PREVIEW_WINDOW_SCENE_PATH)
             .Instantiate<BMPToSceneConverterPreviewWindow>();
-        previewWindow.Initialize(inputFilePaths, mappingFilePath);
         previewWindow.CloseRequested += () => this.OnPreviewWindowClosed();
         EditorInterface.Singleton.GetBaseControl().AddChild(previewWindow);
+        previewWindow.Initialize(inputFilePath, mappingFilePath);
     }
 
     /// <summary>

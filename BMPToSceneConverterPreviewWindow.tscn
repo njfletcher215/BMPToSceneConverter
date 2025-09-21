@@ -1,12 +1,10 @@
 [gd_scene load_steps=5 format=3 uid="uid://dfk3xitw468xh"]
 
-[ext_resource type="Script" uid="uid://hh1abg40rt6d" path="res://addons/BMPToSceneConverter/PreviewWindow.cs" id="1_27mg1"]
-[ext_resource type="Script" uid="uid://cvygw6v664k27" path="res://CommonGodotUI/Scripts/UI/CanvasItemPreview.cs" id="2_tmj44"]
+[ext_resource type="Script" uid="uid://hh1abg40rt6d" path="res://addons/BMPToSceneConverter/BMPToSceneConverterPreviewWindow.cs" id="1_27mg1"]
+[ext_resource type="Texture2D" uid="uid://c2aey4yccfhqg" path="res://addons/BMPToSceneConverter/LoadingTexture.png" id="2_b0s4a"]
+[ext_resource type="Script" uid="uid://cvygw6v664k27" path="res://addons/CommonGodotUI/Scripts/UI/CanvasItemPreview.cs" id="2_tmj44"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_tutln"]
-size = Vector2(256, 256)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_27mg1"]
 size = Vector2(256, 256)
 
 [node name="Window" type="Window" node_paths=PackedStringArray("inputImagePreview", "outputScenePreview", "saveDialog")]
@@ -50,7 +48,7 @@ stretch_mode = 5
 texture_filter = 1
 custom_minimum_size = Vector2(256, 0)
 layout_mode = 2
-texture = SubResource("PlaceholderTexture2D_27mg1")
+texture = ExtResource("2_b0s4a")
 script = ExtResource("2_tmj44")
 
 [node name="Buttons" type="HBoxContainer" parent="VBoxContainer"]
