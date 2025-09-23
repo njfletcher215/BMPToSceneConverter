@@ -3,64 +3,57 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 
-// TODO annotate
+/// <summary>
+/// A window previewing the scene which will be generated from a specific input image.
+/// </summary>
 [Tool]
 public partial class BMPToSceneConverterPreviewWindow : Window {
+    /// <summary>
+    /// A simple guard to ensure this window is only initialized once.
+    /// </summary>
+    [Export] private bool initialized = false;
+
     [Export] private TextureRect inputImagePreview;
     [Export] private CanvasItemPreview outputScenePreview;
     [Export] private FileDialog saveDialog;
 
     private PackedScene scene;
 
-    // TODO this should only be initialized once
+    /// <summary>
+    /// Initialize the window by loading the input image and generating the output scene.
+    /// The output scene is generated asynchronously.
+    /// </summary>
+    /// <param name="inputFilePath">The image being used to generate the output scene.</param>
+    /// <param name="mappingFilePath">The mapping being used to generate the output scene.</param>
     public async Task Initialize(string inputFilePath, string mappingFilePath) {
-        this.LoadInputPreviewImage(inputFilePath);
-        await Task.Run(() => this.GenerateScene(inputFilePath, mappingFilePath));
+        if (!this.initialized) {
+            this.LoadInputPreviewImage(inputFilePath);
+            await Task.Run(() => this.GenerateScene(inputFilePath, mappingFilePath));
+        }
+        this.initialized = true;
     }
 
     public override void _Ready() {
         this.saveDialog.FileSelected += (path) => {
             ResourceSaver.Save(this.scene, path);
-            GD.Print($"Saved scene to: {path}");  // TODO this should be something other than a log; a popup window or something...
-            this.OnCancel();
+            this.Close();
         };
      }
 
     /// <summary>
-    /// Load the input image file as a texture and display it on the input image preview.
+    /// Close the window.
     /// </summary>
-    /// <param name="inputFilePath">The path to the input file.</param>
-    private void LoadInputPreviewImage(string inputFilePath) {
-        Image inputFilePreviewImage = Image.LoadFromFile(inputFilePath);
-        if (inputFilePreviewImage == null) GD.PushError($"Failed to load image: {inputFilePath}");  // TODO this should open an error popup or display it in the preview area instead
-
-        ImageTexture inputFilePreviewTexture = new ImageTexture();
-        inputFilePreviewTexture.SetImage(inputFilePreviewImage);
-
-        this.inputImagePreview.Texture = inputFilePreviewTexture;
-    }
-
-
-    private void OnCancel() {
+    private void Close() {
         this.EmitSignal(SignalName.CloseRequested);
     }
 
-    // TODO any error should open a popup with an error message. Honestly, a success should too.
     /// <summary>
     /// Generate the scene from the input image and mapping files.
     /// </summary>
     /// <param name="inputFilePath">The path to the input image file.</param>
     /// <param name="mappingFilePath">The path to the mapping file.</param>
     private void GenerateScene(string inputFilePath, string mappingFilePath) {
-        if (string.IsNullOrEmpty(inputFilePath) ||
-            string.IsNullOrEmpty(mappingFilePath))
-            return;  // TODO this should open a popup with an error message
-
         var mapping = ResourceLoader.Load<BMPToSceneConverterMapping>(mappingFilePath);
-        if (mapping == null) {
-            GD.PrintErr("Failed to load mapping: ", mappingFilePath);
-            return;
-        }
 
         Node2D root = new Node2D();
         root.Name = "Level";
@@ -82,16 +75,34 @@ public partial class BMPToSceneConverterPreviewWindow : Window {
         }
 
         this.scene = new PackedScene();
-        GD.Print(this.scene.Pack(root));
-        GD.Print(this.scene);
-        GD.Print(root.GetChildCount());
 
         this.outputScenePreview.Preview(root);
     }
 
     /// <summary>
+    /// Load the input image file as a texture and display it on the input image preview.
+    /// </summary>
+    /// <param name="inputFilePath">The path to the input file.</param>
+    private void LoadInputPreviewImage(string inputFilePath) {
+        Image inputFilePreviewImage = Image.LoadFromFile(inputFilePath);
+
+        ImageTexture inputFilePreviewTexture = new ImageTexture();
+        inputFilePreviewTexture.SetImage(inputFilePreviewImage);
+
+        this.inputImagePreview.Texture = inputFilePreviewTexture;
+    }
+
+    /// <summary>
+    /// Simply close the window.
+    /// </summary>
+    private void OnCancel() {
+        this.Close();
+    }
+
+    /// <summary>
     /// Read raw pixel indices from a palettized BMP.
     /// </summary>
+    /// <param name="path">The path to the BMP file.</param>
     /// <returns>A 2D array of pixel indices.</returns>
     public static byte[,] ReadBmpIndexedPixels(string path) {
         using FileStream fs = File.OpenRead(path);

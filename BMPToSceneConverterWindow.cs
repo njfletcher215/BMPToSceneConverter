@@ -5,7 +5,6 @@ using System.IO;
 /// <summary>
 /// The control panel for the Plugin.
 /// </summary>
-// TODO annotate and otherwise clean up
 [Tool]
 public partial class BMPToSceneConverterWindow : Window {
     [Export] private FileDialog inputDialog;
@@ -40,6 +39,11 @@ public partial class BMPToSceneConverterWindow : Window {
         }
     }
 
+    /// <summary>
+    /// A counter for the number of previews which have been closed.
+    /// When all previews are closed, this window will close itself too.
+    /// </summary>
+    /// <value>The number of opened previews which have been closed.</value>
     private int previewsClosed;
 
     public override void _Ready() {
@@ -83,7 +87,7 @@ public partial class BMPToSceneConverterWindow : Window {
     /// Reset this, then hide it.
     /// </summary>
     private void OnCloseRequested() {
-        this.Reset();  // TESTME
+        this.Reset();
         this.Hide();
     }
 
@@ -91,7 +95,7 @@ public partial class BMPToSceneConverterWindow : Window {
     /// Reset this with empty data.
     /// </summary>
     private void Reset() {
-        this.InputFilePaths = new string[0];  // TESTME
+        this.InputFilePaths = new string[0];
         this.previewsClosed = 0;
         this.MappingFilePath = null;
         this.mappingInfoDisplay.Clear();
