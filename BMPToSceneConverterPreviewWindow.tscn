@@ -48,6 +48,7 @@ stretch_mode = 5
 texture_filter = 1
 custom_minimum_size = Vector2(256, 0)
 layout_mode = 2
+size_flags_stretch_ratio = 0.0
 texture = ExtResource("2_b0s4a")
 script = ExtResource("2_tmj44")
 
