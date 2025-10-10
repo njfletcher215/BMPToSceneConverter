@@ -38,9 +38,6 @@ public partial class BMPToSceneConverterColorMappingDisplay : Container {
     /// <param name="color">The color of the color mapping.</param>
     /// <param name="prefab">The prefab of the color mapping.</param>
     public void Update(Color? color = null, PackedScene prefab = null) {
-        GD.Print("Hello");
-        GD.Print(color);
-        GD.Print(prefab);
         if (color != null || prefab != null) this.indexLabel.Show();
         if (color != null) {
             if (this.colorDisplay.Texture == null) {
