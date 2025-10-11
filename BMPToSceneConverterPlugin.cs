@@ -9,7 +9,7 @@ using System.Collections.Immutable;
 [Tool]
 public partial class BMPToSceneConverterPlugin : EditorPlugin {
     private static readonly ImmutableArray<(string, string)> DEPENDENCIES = [
-        ("CommonGodotUI", "Repo can be found at https://github.com/njfletcher215/CommonGodotUI. You may need to re-install the plugin after installing this dependency."),
+        ("GodotToolkit", "Repo can be found at https://github.com/njfletcher215/GodotToolkit. You may need to re-install the plugin after installing this dependency."),
     ];
 
     public const string PREVIEW_WINDOW_SCENE_PATH = "res://addons/BMPToSceneConverter/BMPToSceneConverterPreviewWindow.tscn";
